@@ -1,0 +1,35 @@
+name: CI 
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository 
+        uses: actions/checkout@v4
+
+      - name: List files (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: ls -la
+
+      - name: List files (Windows)
+        if: runner.os == 'Windows'
+        run: dir
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build and test
+        run: mvn -B package
