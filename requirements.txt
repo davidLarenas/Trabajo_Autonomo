@@ -1,0 +1,7 @@
+# requirements para Trabajo_Autonomo
+# Generar automáticamente desde la .venv:
+# CMD:
+#   .venv\Scripts\activate.bat
+#   pip freeze > requirements.txt
+#
+# (Sustituye/añade paquetes manualmente si lo deseas)
